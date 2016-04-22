@@ -1,0 +1,16 @@
+
+bin/main: obj/main.o obj/bloqueLed.o include/bloqueLed.h 
+	g++ -o bin/main obj/main.o obj/bloqueLed.o -Iinclude/ 
+
+obj/main.o: src/main.cpp include/bloqueLed.h
+	g++ -c src/main.cpp -o obj/main.o -Iinclude/
+
+obj/bloqueLed.o: src/bloqueLed.cpp include/bloqueLed.h 
+	g++ -c src/bloqueLed.cpp -o obj/bloqueLed.o -Iinclude/
+
+clean:
+	echo "Limpiando..."
+	rm obj/*.o lib/lib*.a
+
+mrproper: clean
+	rm bin/central bin/main2
