@@ -1,44 +1,36 @@
-#include <fstream>
 #include <iostream>
-#include <imagen.h>
+#include "imagen.h"
+#include <string.h>
 
 using namespace std;
 
 int main(int argc, char **argv){
-    char grises[];
-
-    char arteASCII[4501]; // 4500 + el \0
-       
-     if(argc < 3) {
-        fprintf(stderr,"\nLo has escrito bien ./arteASCII [rutaimagen] [rutacaracteres] \n");
-        exit(-1);
-     }
-
-    ifstream fe(argv[2]);
-
-    while(!fe.eof()) {
-      fe.getline(grises,250);
-    }
-
-    fe.close();
-
+    
+    char grises[500]="";   
+    char ruta[300] = "imagenes/";
+    char ima[100] = "";
     Imagen origen;
 
-    // Leer la imagen gio.pgm
-    if (!origen.leerImagen(argv[1])){
-       cerr << "error leyendo \n";
+    cout<<"Diga el nombre de la imagen con la extension"<< endl;
+    cin >> ima;
+
+    strcat(ruta,ima);
+
+    if (!origen.leerImagen(ruta)){
+       cerr << "error leyendo "<< ruta << "\n";
        return 1;
     }
-    
+    int tama = (origen.filas()*origen.columnas())+1;
+
+    char arteASCII[tama];
+
+    cout<<"Inserta los caracteres: "<< endl;
+    cin >> grises;
+
     cout << "\nLa imagen en arte ASCII es:\n";
-    if(origen.aArteASCII(grises, arteASCII, 4500))
+    if(origen.aArteASCII(grises, arteASCII, tama))
         cout << arteASCII;
     else
         cout << "La conversión no ha sido posible" << endl;  
-    
-    cout << "Ahora Forzamos que no quepa. Debe aparecer un mensaje de error\n";
-    if(origen.aArteASCII(grises, arteASCII, 4199))
-        cout << arteASCII;
-    else
-        cout << "La conversión no ha sido posible" << endl;
+
 }

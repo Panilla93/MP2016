@@ -1,5 +1,6 @@
 #include "imagen.h"
 #include <string.h>
+#include <iostream>
 
 
 using namespace std;
@@ -114,7 +115,8 @@ Imagen Imagen::plano(int k){
 
 bool Imagen::aArteASCII(const char grises[],char ArteASCII[], int maxlong){
 
-	bool resultado = false;
+	bool resultado;
+	
 	if((nfilas * ncolumnas) < maxlong){
 
 		for (int i = 0; i < nfilas*ncolumnas; ++i){
@@ -125,8 +127,10 @@ bool Imagen::aArteASCII(const char grises[],char ArteASCII[], int maxlong){
 					ArteASCII[i]=grises[this->getPos(i)*strlen(grises)/256];
 				}
 		}
-			
+		resultado=true;	
 	}
 	else
-		return resultado;
+		resultado=false;
+
+	return resultado;
 }

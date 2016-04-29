@@ -20,6 +20,9 @@ $(BIN)/testarteASCII: $(OBJ)/testarteASCII.o $(OBJ)/imagen.o $(OBJ)/pgm.o $(OBJ)
 $(BIN)/testplano: $(OBJ)/testplano.o $(OBJ)/imagen.o $(OBJ)/pgm.o $(OBJ)/byte.o
 	$(CXX) -o bin/testplano $(OBJ)/testplano.o $(OBJ)/imagen.o $(OBJ)/pgm.o $(OBJ)/byte.o -I$(INC)/
 
+$(BIN)/testimagen: $(OBJ)/testimagen.o $(OBJ)/imagen.o $(OBJ)/pgm.o $(OBJ)/byte.o
+	$(CXX) -o bin/testimagen $(OBJ)/testimagen.o $(OBJ)/imagen.o $(OBJ)/pgm.o $(INC)/byte.o -I$(INC)/
+
 $(OBJ)/arteASCII.o:$(SRC)/arteASCII.cpp $(INC)/imagen.h $(INC)/pgm.h $(INC)/byte.h
 	$(CXX) -c $(SRC)/arteASCII.cpp -o $(OBJ)/arteASCII.o -I$(INC)/
 
